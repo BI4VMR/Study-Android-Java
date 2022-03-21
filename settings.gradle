@@ -1,0 +1,22 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "Study_Android_Java"
+include ':base-helloworld'
+include ':datastore-sharedpreferences'
+include ':service-base'
+include ':ui-fragment-base'
+include ':ui-recyclerview-base'
+include ':ui-fragment-viewpager2'
+include ':ui-fragment-dynamic'
