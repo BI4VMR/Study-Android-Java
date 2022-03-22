@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Study_Android_Java">
+
         <service
-            android:name=".MyService"
+            android:name=".DownloadService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="false" />
 
         <activity
             android:name=".MainActivity"
