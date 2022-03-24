@@ -6,7 +6,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "net.bi4vmr.study.service_aidl_server"
+        applicationId "net.bi4vmr.study.aidlserver"
         minSdk 26
         targetSdk 31
         versionCode 1

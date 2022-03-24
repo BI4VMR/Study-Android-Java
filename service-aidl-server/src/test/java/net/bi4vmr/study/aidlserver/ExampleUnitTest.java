@@ -1,4 +1,4 @@
-package net.bi4vmr.study.service_aidl_client;
+package net.bi4vmr.study.aidlserver;
 
 import org.junit.Test;
 

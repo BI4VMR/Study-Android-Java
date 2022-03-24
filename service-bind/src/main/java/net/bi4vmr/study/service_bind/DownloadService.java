@@ -16,6 +16,8 @@ public class DownloadService extends Service {
     // 下载线程
     private Thread downloadThread;
 
+    private CallBack callback = null;
+
     @Override
     public void onCreate() {
         Log.i("myapp", "onCreate()");
@@ -41,19 +43,17 @@ public class DownloadService extends Service {
         downloadThread.interrupt();
     }
 
-    private CallBack callback = null;
+    public interface CallBack {
+        void onDataChanged(double percent);
+    }
 
     public void setCallback(CallBack callback) {
         this.callback = callback;
     }
 
-    public interface CallBack {
-        void onDataChanged(String data);
-    }
-
     class DownloadBinder extends Binder {
 
-        private int totalLength = 10000;
+        private final int TOTAL = 100;
         private int length = 0;
 
         public void start() {
@@ -61,9 +61,12 @@ public class DownloadService extends Service {
             downloadThread = new Thread(() -> {
                 Log.i("myapp", "下载开始");
                 try {
-                    // 休眠5秒，模拟耗时操作。
-                    Thread.sleep(5000);
-                    callback.onDataChanged("下载完成");
+                    while (length < TOTAL) {
+                        length += 10;
+                        callback.onDataChanged(getProgress() * 100);
+                        // 休眠1秒，模拟耗时操作。
+                        Thread.sleep(1000);
+                    }
                     Log.i("myapp", "下载完成");
                 } catch (InterruptedException e) {
                     Log.i("myapp", "任务终止");
@@ -74,7 +77,7 @@ public class DownloadService extends Service {
         }
 
         public double getProgress() {
-            return (length == 0) ? 0.0 : ((double) totalLength / length);
+            return ((double) length / TOTAL);
         }
 
         public DownloadService getService() {

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.bi4vmr.study.service_aidl_client">
+    package="net.bi4vmr.study.aidlclient">
+
+    <queries>
+        <package android:name="net.bi4vmr.study.aidlserver" />
+    </queries>
 
     <application
         android:allowBackup="true"
@@ -11,7 +15,7 @@
         android:theme="@style/Theme.Study_Android_Java">
 
         <activity
-            android:name=".MainActivity"
+            android:name="net.bi4vmr.study.aidlclient.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,5 +24,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

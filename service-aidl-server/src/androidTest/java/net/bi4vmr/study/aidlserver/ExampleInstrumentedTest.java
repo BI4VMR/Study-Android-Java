@@ -1,4 +1,4 @@
-package net.bi4vmr.study.service_aidl_client;
+package net.bi4vmr.study.aidlserver;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("net.bi4vmr.study.service_aidl_client", appContext.getPackageName());
+        assertEquals("net.bi4vmr.study.service_aidl_server", appContext.getPackageName());
     }
 }

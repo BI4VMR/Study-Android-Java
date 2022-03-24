@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.bi4vmr.study.aidl">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="net.bi4vmr.study.aidlserver">
 
     <application
         android:allowBackup="true"
@@ -11,23 +12,14 @@
         android:theme="@style/Theme.Study_Android_Java">
 
         <service
-            android:name=".MyService"
-            android:enabled="true">
+            android:name=".DownloadService"
+            android:enabled="true"
+            android:exported="true"
+            tools:ignore="ExportedService">
 
-            <!--            <intent-filter>-->
-            <!--                <action android:name="net.bi4vmr.study.aidl.MyService" />-->
-            <!--            </intent-filter>-->
-        </service>
-
-        <activity
-            android:name="net.bi4vmr.study.aidl.MainActivity"
-            android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="net.bi4vmr.aidl.DOWNLOAD" />
             </intent-filter>
-        </activity>
+        </service>
     </application>
-
 </manifest>
