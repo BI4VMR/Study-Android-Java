@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.bi4vmr.study.broadcast_system" >
+    package="net.bi4vmr.study.broadcast_system">
+
+    <!-- 申请接收”系统启动完毕“事件广播的权限-->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -8,11 +11,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Study_Android_Java" >
+        android:theme="@style/Theme.Study_Android_Java">
 
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,14 +23,16 @@
             </intent-filter>
         </activity>
 
+        <!-- 静态注册的广播接收器-->
+        <!-- 接收“系统启动完成”消息-->
         <receiver
-            android:name=".MyReceiver"
+            android:name=".BootCompleteReceiver"
             android:enabled="true"
-            android:exported="true" >
+            android:exported="true">
+
             <intent-filter>
-                <action android:name="android.intent.action.TIME_TICK" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
     </application>
-
 </manifest>

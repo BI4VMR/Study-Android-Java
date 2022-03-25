@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         filter.addAction(Intent.ACTION_TIME_TICK);
         // 创建接收器实例，并进行动态注册。
         receiver = new TimeTickReceiver();
-//        registerReceiver(receiver, filter);
+        registerReceiver(receiver, filter);
         Log.i("myapp", "已注册TimeTickReceiver");
     }
 
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         // 组件被销毁时，注销广播接收器。
-//        unregisterReceiver(receiver);
+        unregisterReceiver(receiver);
         Log.i("myapp", "已注销TimeTickReceiver");
     }
 
