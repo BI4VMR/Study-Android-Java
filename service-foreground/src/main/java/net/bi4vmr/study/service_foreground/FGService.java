@@ -23,7 +23,39 @@ public class FGService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i("myapp", "onStartCommand()");
+        // 创建通知
+        Notification notification = createNotification();
 
+        /*
+         * 开启前台服务
+         *
+         * id:服务的唯一标识
+         * notification:要显示的通知
+         */
+        startForeground(100, notification);
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.i("myapp", "onDestroy()");
+        /*
+         * 终止前台服务
+         *
+         * removeNotification:是否移除通知
+         */
+        stopForeground(true);
+        super.onDestroy();
+    }
+
+    // 创建持久通知
+    private Notification createNotification() {
         // 通知渠道的ID与名称
         final String CHANNEL_ID = "net.bi4vmr.study";
         final String CHANNEL_NAME = "BI4VMR";
@@ -50,28 +82,6 @@ public class FGService extends Service {
                 .setContentText("测试前台服务与持久通知")
                 // 设置显示时间
                 .setWhen(System.currentTimeMillis());
-        Notification notification = builder.build();
-
-        /*
-         * 开启前台服务
-         *
-         * id:服务的唯一标识
-         * notification:要显示的通知
-         */
-        startForeground(100, notification);
-        return super.onStartCommand(intent, flags, startId);
-    }
-
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
-
-    @Override
-    public void onDestroy() {
-        Log.i("myapp", "onDestroy()");
-        stopForeground(true);
-        super.onDestroy();
+        return builder.build();
     }
 }
