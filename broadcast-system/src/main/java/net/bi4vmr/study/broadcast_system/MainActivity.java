@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 创建过滤器，填写要接收的广播类型。
+        // 创建过滤器，设置想要接收的广播类型。
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_TIME_TICK);
         // 创建接收器实例，并进行动态注册。
@@ -29,12 +29,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        super.onPause();
         // 组件被销毁时，注销广播接收器。
         unregisterReceiver(receiver);
         Log.i("myapp", "已注销TimeTickReceiver");
+        super.onPause();
     }
 
+    // 自定义广播接收器类，收到相应广播时执行"onReceive()"方法中的操作。
     static class TimeTickReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
