@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         Button btBind = findViewById(R.id.bt_bind);
         Button btUnbind = findViewById(R.id.bt_unbind);
         Button btGetProgress = findViewById(R.id.bt_getprogress);
+        Button btAddTask = findViewById(R.id.bt_addtask);
+        Button btGetTask = findViewById(R.id.bt_gettask);
 
         connection = new ServiceConnection() {
             @Override
@@ -67,6 +69,35 @@ public class MainActivity extends AppCompatActivity {
             if (isServiceConnected) {
                 try {
                     tv_progress.setText(downloadService.getProgress() + "%");
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Log.i("myapp", "连接未就绪");
+            }
+        });
+
+        // 添加任务按钮
+        btAddTask.setOnClickListener(v -> {
+            // 根据连接状态标志位确定是否能够访问接口
+            if (isServiceConnected) {
+                try {
+                    ItemBean item = new ItemBean("1.txt", "https://test.net/1.txt");
+                    downloadService.addTask(item);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Log.i("myapp", "连接未就绪");
+            }
+        });
+
+        // 获取任务按钮
+        btGetTask.setOnClickListener(v -> {
+            // 根据连接状态标志位确定是否能够访问接口
+            if (isServiceConnected) {
+                try {
+                    Log.i("myapp", downloadService.getTask().toString());
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }

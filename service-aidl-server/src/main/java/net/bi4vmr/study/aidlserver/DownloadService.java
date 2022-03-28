@@ -8,12 +8,21 @@ import android.util.Log;
 
 import net.bi4vmr.aidl.IDownloadService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DownloadService extends Service {
 
     private final IDownloadService.Stub stub = new IDownloadService.Stub() {
 
+        private final List<ItemBean> tasks;
         private final int TOTAL = 100;
         private int length = 0;
+
+        {
+            // 初始化任务列表
+            tasks = new ArrayList<>();
+        }
 
         @Override
         public void start(String URL) {
@@ -36,6 +45,16 @@ public class DownloadService extends Service {
         @Override
         public double getProgress() {
             return (double) length / TOTAL;
+        }
+
+        @Override
+        public void addTask(ItemBean item) {
+            tasks.add(item);
+        }
+
+        @Override
+        public List<ItemBean> getTask() {
+            return tasks;
         }
     };
 
