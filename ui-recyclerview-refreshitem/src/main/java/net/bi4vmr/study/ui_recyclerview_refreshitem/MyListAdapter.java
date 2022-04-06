@@ -1,6 +1,7 @@
 package net.bi4vmr.study.ui_recyclerview_refreshitem;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,35 +72,35 @@ public class MyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position, @NonNull List<Object> payloads) {
+        Log.d("myapp", "payloads:" + payloads);
         // 如果载荷List内容为空，执行普通onBindViewHolder()方法。
         if (payloads.isEmpty()) {
             onBindViewHolder(holder, position);
         } else {
-            // 此处只处理载荷List中的第一项，以此为例。
-            Object data = payloads.get(0);
-            // 根据表项的类型，执行更新操作。
-            int type = getItemViewType(position);
-            if (type == ItemOneBean.VIEWTYPE) {
-                ItemOneBean newItem = (ItemOneBean) data;
-                ItemOneVH vh = (ItemOneVH) holder;
-                // 如果某个属性为空，说明不需要更新对应的控件。
-                if (newItem.getTitle() != null) {
-                    vh.tv_title.setText(newItem.getTitle());
-                }
-                if (newItem.getComment() != null) {
-                    vh.tv_comment.setText(newItem.getComment());
-                }
-
-
-            } else if (type == ItemTwoBean.VIEWTYPE) {
-                ItemTwoBean newItem = (ItemTwoBean) data;
-                ItemTwoVH vh = (ItemTwoVH) holder;
-                // 如果某个属性为空，说明不需要更新对应的控件。
-                if (newItem.getTitle() != null) {
-                    vh.tv_title.setText(newItem.getTitle());
-                }
-                if (newItem.getComment() != null) {
-                    vh.tv_comment.setText(newItem.getComment());
+            // 短时间内多次更新同一表项时，"payloads"中可能有多个项，可以根据需要依次处理或者只取其中一项。
+            for (Object data : payloads) {
+                // 根据表项的类型，执行更新操作。
+                int type = getItemViewType(position);
+                if (type == ItemOneBean.VIEWTYPE) {
+                    ItemOneBean newItem = (ItemOneBean) data;
+                    ItemOneVH vh = (ItemOneVH) holder;
+                    // 如果某个属性为空，说明不需要更新对应的控件。
+                    if (newItem.getTitle() != null) {
+                        vh.tv_title.setText(newItem.getTitle());
+                    }
+                    if (newItem.getComment() != null) {
+                        vh.tv_comment.setText(newItem.getComment());
+                    }
+                } else if (type == ItemTwoBean.VIEWTYPE) {
+                    ItemTwoBean newItem = (ItemTwoBean) data;
+                    ItemTwoVH vh = (ItemTwoVH) holder;
+                    // 如果某个属性为空，说明不需要更新对应的控件。
+                    if (newItem.getTitle() != null) {
+                        vh.tv_title.setText(newItem.getTitle());
+                    }
+                    if (newItem.getComment() != null) {
+                        vh.tv_comment.setText(newItem.getComment());
+                    }
                 }
             }
         }
