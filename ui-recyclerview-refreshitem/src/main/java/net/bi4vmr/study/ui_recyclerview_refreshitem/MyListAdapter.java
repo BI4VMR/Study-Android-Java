@@ -15,16 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Name          : ItemTwoBean
- * Author        : 詹屹罡
+ * Name          : MyListAdapter
+ * Author        : BI4VMR
  * Date          : 2022-04-06 10:37
  * Description   : RecyclerView适配器
  */
 public class MyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    //数据源
+    // 数据源
     List<ItemBean> dataSource;
-    //环境
+    // 环境
     Context mContext;
 
     public MyListAdapter(List<ItemBean> dataSource, Context context) {
