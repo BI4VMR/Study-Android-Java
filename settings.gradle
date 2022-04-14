@@ -40,3 +40,4 @@ include ':sys-contentprovider-base'
 include ':store-sharedpreferences'
 
 include ':media-audio-audiofocus'
+include ':media-lib-mediastore'
