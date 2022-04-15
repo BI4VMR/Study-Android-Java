@@ -41,3 +41,4 @@ include ':store-sharedpreferences'
 
 include ':media-audio-audiofocus'
 include ':media-lib-mediastore'
+include ':store-file'

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvInfoAPK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="APK包内数据"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btRaw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="读取Raw目录数据"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvInfoAPK"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btAssets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="读取Assets目录数据"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btRaw"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/tvInfoPrivate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="应用私有数据"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btAssets"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btInternal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取内置存储路径"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvInfoPrivate"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btExternal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取外置存储路径"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btInternal"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/tvInfoPublic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="共享数据"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btExternal"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btCommon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取共享存储路径"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvInfoPublic"
+        tools:ignore="HardcodedText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
