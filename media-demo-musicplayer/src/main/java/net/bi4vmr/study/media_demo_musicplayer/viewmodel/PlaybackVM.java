@@ -34,24 +34,24 @@ public class PlaybackVM extends AndroidViewModel {
     private final LiveData<MediaMetadataCompat> observeMediaMetadata = mediaMetadata;
 
     /**
-     * Name        TODO 添加方法名称
+     * Name        设置回放状态
      * Author      BI4VMR
      * Date        2022-4-19 22:56
-     * Description TODO 添加方法描述
-     * @param
-     * @return
+     * Description 设置回放状态（需要同步调用）。
+     *
+     * @param state 新的回放状态
      */
     public void setPlaybackState(PlaybackStateCompat state) {
         playbackState.setValue(state);
     }
 
     /**
-     * Name        TODO 添加方法名称
+     * Name        设置媒体元数据
      * Author      BI4VMR
      * Date        2022-4-19 22:56
-     * Description TODO 添加方法描述
-     * @param
-     * @return
+     * Description  设置媒体元数据（需要同步调用）。
+     *
+     * @param metadata 新的媒体元数据
      */
     public void setMediaMetadata(MediaMetadataCompat metadata) {
         mediaMetadata.setValue(metadata);

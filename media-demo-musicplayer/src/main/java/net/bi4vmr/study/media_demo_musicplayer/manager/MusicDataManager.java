@@ -18,11 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Name          : MusicManager
+ * Name          : 音乐资源管理器
  * Author        : 詹屹罡
  * Email         : yigangzhan@pateo.com.cn
  * Date          : 2022-04-18 15:03
- * Description   : TODO 添加描述
+ * Description   : 管理音乐媒体文件
  */
 public class MusicDataManager {
 

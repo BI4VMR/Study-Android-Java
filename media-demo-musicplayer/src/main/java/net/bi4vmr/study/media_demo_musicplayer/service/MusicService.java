@@ -4,6 +4,9 @@ import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.AudioAttributes;
+import android.media.AudioFocusRequest;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +15,7 @@ import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,6 +43,8 @@ public class MusicService extends MediaBrowserServiceCompat {
     // 全局环境
     private Context mContext;
 
+    private AudioManager manager;
+    private AudioFocusRequest focusRequest;
     private MediaSessionCompat mediaSession;
     private MediaPlayer mediaPlayer;
 
@@ -48,6 +54,20 @@ public class MusicService extends MediaBrowserServiceCompat {
         Log.d(TAG_APP, TAG_CLS + ":onCreate()");
 
         mContext = getApplicationContext();
+        // 获取音频管理器
+        manager = (AudioManager) getSystemService(AUDIO_SERVICE);
+        // 音频属性，影响系统是否允许当前应用获取音频焦点。
+        AudioAttributes attributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_MEDIA)
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .build();
+        // 构建请求实例，请求持久获得音频焦点。
+        focusRequest = new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
+                // 设置音频属性，是可选参数，默认值为Usage为USAGE_MEDIA的实例。
+                .setAudioAttributes(attributes)
+                // 设置音频焦点改变监听器
+                .setOnAudioFocusChangeListener(new MyAudioFocusChangeListener())
+                .build();
 
         // 创建媒体会话实例
         mediaSession = new MediaSessionCompat(this, TAG_CLS);
@@ -79,8 +99,13 @@ public class MusicService extends MediaBrowserServiceCompat {
              */
             @Override
             public void onPrepared(MediaPlayer mp) {
-                // 开始放音
-                mp.start();
+                Log.d(TAG_APP, TAG_CLS + ":onPrepared()");
+                if (checkAudioFocus()) {
+                    // 开始放音
+                    mp.start();
+                } else {
+                    Toast.makeText(mContext, "音频焦点被其它程序占用", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -93,18 +118,28 @@ public class MusicService extends MediaBrowserServiceCompat {
              */
             @Override
             public void onCompletion(MediaPlayer mp) {
-
+                Log.d(TAG_APP, TAG_CLS + ":onCompletion()");
+                // 重置MediaPlayer状态
+                mp.reset();
+                // 释放音频焦点
+                manager.abandonAudioFocusRequest(focusRequest);
+                // 清空播放状态
+                PlaybackStateCompat playbackState = new PlaybackStateCompat.Builder()
+                        .setState(PlaybackStateCompat.STATE_NONE, 0, 1.0f)
+                        .build();
+                mediaSession.setPlaybackState(playbackState);
             }
         });
     }
 
     /**
-     * 接受启动服务的指令，转为前台服务，防止界面在后台时服务被系统终止。
+     * Name        : onStartCommand()
+     * Description : 接受启动服务的指令，转为前台服务，防止界面在后台时服务被系统终止。
      *
-     * @param intent
-     * @param flags
-     * @param startId
-     * @return
+     * @param intent  启动本服务的Intent
+     * @param flags   TODO 服务标志位
+     * @param startId TODO 服务ID
+     * @return 返回"START_NOT_STICKY"，防止服务异常后自启，突然播放音乐。
      */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -155,13 +190,38 @@ public class MusicService extends MediaBrowserServiceCompat {
         super.onDestroy();
     }
 
-    /*
-     * 播放回调，处理控制器的指令。
-     */
+    // 检查音频焦点
+    private boolean checkAudioFocus() {
+        // 使用音频管理器请求音频焦点
+        int result = manager.requestAudioFocus(focusRequest);
+        // 根据返回值执行进一步操作
+        switch (result) {
+            case AudioManager.AUDIOFOCUS_REQUEST_GRANTED:
+                Log.d(TAG_APP, TAG_CLS + ":音频焦点请求成功");
+                return true;
+            case AudioManager.AUDIOFOCUS_REQUEST_DELAYED:
+                Log.w(TAG_APP, TAG_CLS + ":音频焦点请求成功（延迟）");
+                return false;
+            case AudioManager.AUDIOFOCUS_REQUEST_FAILED:
+                // “正在通话”等情况会导致音频焦点请求失败
+                Log.w(TAG_APP, TAG_CLS + ":音频焦点请求失败");
+                return false;
+            default:
+                Log.e(TAG_APP, TAG_CLS + ":音频焦点状态未知");
+                return false;
+        }
+    }
+
+    // 播放回调，处理控制器的指令。
     class MyMediaControllerCallback extends MediaSessionCompat.Callback {
         @Override
         public void onPlay() {
-            Log.d(TAG_APP, TAG_CLS + ":onPlay");
+            Log.d(TAG_APP, TAG_CLS + ":onPlay()");
+
+            // 如果获取音频焦点失败，退出当前方法。
+            if (!checkAudioFocus()) {
+                return;
+            }
 
             // 继续MediaPlayer的播放动作
             mediaPlayer.start();
@@ -216,7 +276,7 @@ public class MusicService extends MediaBrowserServiceCompat {
 
         @Override
         public void onPause() {
-            Log.d(TAG_APP, TAG_CLS + ":onPause");
+            Log.d(TAG_APP, TAG_CLS + ":onPause()");
 
             // 暂停MediaPlayer
             mediaPlayer.pause();
@@ -225,6 +285,54 @@ public class MusicService extends MediaBrowserServiceCompat {
                     .setState(PlaybackStateCompat.STATE_PAUSED, 0, 1.0f)
                     .build();
             mediaSession.setPlaybackState(playbackState);
+        }
+    }
+
+    // “音频焦点改变”事件监听器
+    class MyAudioFocusChangeListener implements AudioManager.OnAudioFocusChangeListener {
+
+        /**
+         * Name        : onAudioFocusChange()
+         * Description : 音频焦点发生变化时触发此方法。
+         *
+         * @param focusChange 表示当前程序的焦点状态
+         */
+        @Override
+        public void onAudioFocusChange(int focusChange) {
+            switch (focusChange) {
+                case AudioManager.AUDIOFOCUS_GAIN:
+                    Log.d(TAG_APP, TAG_CLS + ":重新获取持久音频焦点");
+                    mediaSession.getController().getTransportControls().play();
+                    break;
+                case AudioManager.AUDIOFOCUS_GAIN_TRANSIENT:
+                    Log.d(TAG_APP, TAG_CLS + ":重新获取临时音频焦点");
+                    break;
+                case AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK:
+                    Log.d(TAG_APP, TAG_CLS + ":重新获取临时音频焦点，且其它音频流的音量降低。");
+                    break;
+                case AudioManager.AUDIOFOCUS_LOSS:
+                    Log.d(TAG_APP, TAG_CLS + ":持久失去音频焦点");
+                    // 停止放音操作
+                    mediaSession.getController().getTransportControls().pause();
+                    /*
+                     * 释放音频焦点
+                     *
+                     * Android 9.0以下系统中失去持久音频焦点后，一旦其它程序释放持久焦点，本程序会再次收到
+                     * "AUDIOFOCUS_GAIN"事件，继续播放。
+                     * 为了防止对用户造成困扰，持久失去焦点后此处自主释放音频焦点，从此不再接收任何焦点改变事件。
+                     */
+                    manager.abandonAudioFocusRequest(focusRequest);
+                    break;
+                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+                    Log.d(TAG_APP, TAG_CLS + ":暂时失去音频焦点");
+                    break;
+                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+                    Log.d(TAG_APP, TAG_CLS + ":暂时失去音频焦点，且本程序应当降低音量播放。");
+                    break;
+                default:
+                    Log.w(TAG_APP, TAG_CLS + ":收到焦点改变事件，但未处理。");
+                    break;
+            }
         }
     }
 }
