@@ -51,6 +51,11 @@ public class MusicService extends MediaBrowserServiceCompat {
 
         // 创建媒体会话实例
         mediaSession = new MediaSessionCompat(this, TAG_CLS);
+        // 设置初始回放状态为无
+        PlaybackStateCompat initState = new PlaybackStateCompat.Builder()
+                .setState(PlaybackStateCompat.STATE_NONE, 0, 1.0f)
+                .build();
+        mediaSession.setPlaybackState(initState);
         // 设置MediaController的回调方法，处理媒体控制指令。
         mediaSession.setCallback(new MyMediaControllerCallback());
         // 激活会话，使得会话控制器能够接收指令。
@@ -111,7 +116,7 @@ public class MusicService extends MediaBrowserServiceCompat {
         Notification notification = mnManager.createNotification();
         // 启动前台服务，并绑定通知。
         startForeground(100, notification);
-        return super.onStartCommand(intent, flags, startId);
+        return START_NOT_STICKY;
     }
 
     /**

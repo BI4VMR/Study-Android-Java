@@ -37,9 +37,9 @@ include ':sys-broadcast-ordered'
 include ':sys-broadcast-local'
 include ':sys-contentprovider-base'
 
+include ':store-file'
 include ':store-sharedpreferences'
 
 include ':media-audio-audiofocus'
 include ':media-lib-mediastore'
-include ':store-file'
 include ':media-demo-musicplayer'

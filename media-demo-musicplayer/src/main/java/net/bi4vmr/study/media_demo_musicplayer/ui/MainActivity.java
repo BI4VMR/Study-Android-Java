@@ -3,7 +3,6 @@ package net.bi4vmr.study.media_demo_musicplayer.ui;
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.media.MediaBrowserCompat;
@@ -15,17 +14,20 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.content.res.AppCompatResources;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import net.bi4vmr.study.media_demo_musicplayer.R;
 import net.bi4vmr.study.media_demo_musicplayer.adapter.MusicListAdapter;
-import net.bi4vmr.study.media_demo_musicplayer.bean.MusicVO;
 import net.bi4vmr.study.media_demo_musicplayer.common.MusicApp;
-import net.bi4vmr.study.media_demo_musicplayer.databinding.ActivityMainBinding;
+import net.bi4vmr.study.media_demo_musicplayer.databinding.MainActivityBinding;
 import net.bi4vmr.study.media_demo_musicplayer.manager.MusicDataManager;
+import net.bi4vmr.study.media_demo_musicplayer.model.MusicVO;
 import net.bi4vmr.study.media_demo_musicplayer.service.MusicService;
+import net.bi4vmr.study.media_demo_musicplayer.viewmodel.PlaybackVM;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,13 +35,16 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private final static String TAG_APP = MusicApp.TAG;
-    private static final String TAG_CLS = "MainActivity";
+    private static final String TAG = "MainActivity";
 
-    private ActivityMainBinding binding;
+    private MainActivityBinding binding;
     private MusicListAdapter adapter;
+    private PlaybackBarFragment playbackBarFragment;
+
+    // 回放ViewModel
+    private PlaybackVM playbackVM;
 
     private MusicDataManager musicManager;
-
     private MediaBrowserCompat mediaBrowser;
     private MediaControllerCompat mediaController;
 
@@ -47,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG_APP, TAG_CLS + ":onCreate()");
+        Log.d(TAG_APP, TAG + ":onCreate()");
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = MainActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // 初始化音乐列表控件
@@ -63,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             // 列表项的点击事件
             @Override
             public void onItemClick(int position, MusicVO vo) {
-                Log.d(TAG_APP, TAG_CLS + ":点击表项：" + vo.toString());
+                Log.d(TAG_APP, TAG + ":点击表项：" + vo.toString());
                 //
                 Uri itemURI = Uri.parse(vo.getUri());
                 // 获取额外数据
@@ -76,31 +81,26 @@ public class MainActivity extends AppCompatActivity {
             // 列表项的长按事件
             @Override
             public void onItemLongClick(int position, MusicVO vo) {
-                Log.d(TAG_APP, TAG_CLS + ":长按表项：" + vo.toString());
+                Log.d(TAG_APP, TAG + ":长按表项：" + vo.toString());
             }
         });
 
-        // 播放按钮点击事件
-        binding.layoutMusicbar.ibPlay.setOnClickListener(v -> {
-            int status = mediaController.getPlaybackState().getState();
-            switch (status) {
-                case PlaybackStateCompat.STATE_PLAYING:
-                    mediaController.getTransportControls().pause();
-                    break;
-                case PlaybackStateCompat.STATE_PAUSED:
-                    mediaController.getTransportControls().play();
-                    break;
-                default:
-                    break;
-            }
-        });
-
-        // 获取音乐管理器实例
-        musicManager = MusicDataManager.getInstance(this);
+        // 初始化回放控制栏
+        playbackBarFragment = PlaybackBarFragment.newInstance();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(R.id.fmPlaybackBar, playbackBarFragment);
+        transaction.commit();
 
         // 开启服务
         Intent intent = new Intent(this, MusicService.class);
         startForegroundService(intent);
+
+        // 获取回放ViewModel
+        playbackVM = new ViewModelProvider(this).get(PlaybackVM.class);
+
+        // 获取音乐管理器实例
+        musicManager = MusicDataManager.getInstance(this);
 
         // 创建MediaBrowser
         mediaBrowser = new MediaBrowserCompat(this,
@@ -109,10 +109,11 @@ public class MainActivity extends AppCompatActivity {
                 null);
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG_APP, TAG_CLS + ":onResume()");
+        Log.d(TAG_APP, TAG + ":onResume()");
 
         // 连接音乐播放服务
         mediaBrowser.connect();
@@ -126,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        Log.d(TAG_APP, TAG_CLS + ":onStop()");
+        Log.d(TAG_APP, TAG + ":onStop()");
 
         if (mediaBrowser != null) {
             mediaBrowser.disconnect();
@@ -142,26 +143,29 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onConnected() {
-            Log.d(TAG_APP, TAG_CLS + ":onConnected()");
+            Log.d(TAG_APP, TAG + ":onConnected()");
 
             // 获取令牌
             MediaSessionCompat.Token token = mediaBrowser.getSessionToken();
-            // 通过令牌获取媒体控制器
+            // 通过令牌创建媒体控制器
             mediaController = new MediaControllerCompat(getApplicationContext(), token);
             // 注册媒体控制器回调，处理播放状态变更消息。
             mediaController.registerCallback(new MyMediaControllerCallback());
-
-            mediaController.getMetadata();
+            // 将回放状态与媒体元数据传递给ViewModel
+            playbackVM.setPlaybackState(mediaController.getPlaybackState());
+            playbackVM.setMediaMetadata(mediaController.getMetadata());
+            // 将控制器实例传递给回放状态栏
+            playbackBarFragment.setMediaController(mediaController);
         }
 
         @Override
         public void onConnectionSuspended() {
-            Log.d(TAG_APP, TAG_CLS + ":onConnectionSuspended()");
+            Log.d(TAG_APP, TAG + ":onConnectionSuspended()");
         }
 
         @Override
         public void onConnectionFailed() {
-            Log.d(TAG_APP, TAG_CLS + ":onConnectionFailed()");
+            Log.d(TAG_APP, TAG + ":onConnectionFailed()");
         }
     }
 
@@ -178,23 +182,9 @@ public class MainActivity extends AppCompatActivity {
         @SuppressLint("SwitchIntDef")
         @Override
         public void onPlaybackStateChanged(@Nullable PlaybackStateCompat state) {
-            Log.d(TAG_APP, TAG_CLS + ":onPlaybackStateChanged()");
-            if (state == null) {
-                return;
-            }
-
-            int status = state.getState();
-            switch (status) {
-                case PlaybackStateCompat.STATE_NONE:
-                    Log.i(TAG_APP, TAG_CLS + ":STATE_NONE");
-                    break;
-                case PlaybackStateCompat.STATE_PLAYING:
-                    binding.layoutMusicbar.ibPlay.setImageDrawable(AppCompatResources.getDrawable(getApplicationContext(), R.drawable.ic_playback_pause));
-                    break;
-                case PlaybackStateCompat.STATE_PAUSED:
-                    binding.layoutMusicbar.ibPlay.setImageDrawable(AppCompatResources.getDrawable(getApplicationContext(), R.drawable.ic_playback_play));
-                    break;
-            }
+            Log.d(TAG_APP, TAG + ":onPlaybackStateChanged()");
+            // 更新回放状态LiveData
+            playbackVM.setPlaybackState(state);
         }
 
         /**
@@ -204,23 +194,9 @@ public class MainActivity extends AppCompatActivity {
          */
         @Override
         public void onMetadataChanged(@Nullable MediaMetadataCompat metadata) {
-            Log.d(TAG_APP, TAG_CLS + ":onMetadataChanged()");
-
-            // 如果媒体元数据为Null，则重置文本，退出当前方法。
-            if (metadata == null) {
-                binding.layoutMusicbar.tvTitle.setText("无曲目信息");
-                binding.layoutMusicbar.tvArtist.setText("-");
-                binding.layoutMusicbar.ivCover.setImageResource(R.drawable.ic_playback_unknown_cover);
-                return;
-            }
-
-            // 媒体元数据不为Null，则读取数据，并设置到文本上。
-            String title = metadata.getString(MediaMetadataCompat.METADATA_KEY_TITLE);
-            String artist = metadata.getString(MediaMetadataCompat.METADATA_KEY_ARTIST);
-            Bitmap cover = metadata.getBitmap(MediaMetadataCompat.METADATA_KEY_ART);
-            binding.layoutMusicbar.tvTitle.setText(title);
-            binding.layoutMusicbar.tvArtist.setText(artist);
-            binding.layoutMusicbar.ivCover.setImageBitmap(cover);
+            Log.d(TAG_APP, TAG + ":onMetadataChanged()");
+            // 更新媒体元数据LiveData
+            playbackVM.setMediaMetadata(metadata);
         }
     }
 }

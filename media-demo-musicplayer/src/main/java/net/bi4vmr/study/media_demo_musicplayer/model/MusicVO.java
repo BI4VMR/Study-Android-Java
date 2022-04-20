@@ -1,4 +1,4 @@
-package net.bi4vmr.study.media_demo_musicplayer.bean;
+package net.bi4vmr.study.media_demo_musicplayer.model;
 
 import android.graphics.Bitmap;
 

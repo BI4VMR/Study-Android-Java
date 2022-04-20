@@ -10,15 +10,15 @@
         android:id="@+id/rvMusic"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/layout_musicbar"
+        app:layout_constraintBottom_toTopOf="@id/fmPlaybackBar"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_musiclist" />
+        tools:listitem="@layout/music_listitem" />
 
-    <include
-        android:id="@+id/layout_musicbar"
-        layout="@layout/com_musicbar"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fmPlaybackBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout="@layout/playback_bar_fragment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

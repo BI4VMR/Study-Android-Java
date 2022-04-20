@@ -11,8 +11,8 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
 
-import net.bi4vmr.study.media_demo_musicplayer.bean.MusicVO;
 import net.bi4vmr.study.media_demo_musicplayer.common.MusicApp;
+import net.bi4vmr.study.media_demo_musicplayer.model.MusicVO;
 
 import java.util.ArrayList;
 import java.util.List;

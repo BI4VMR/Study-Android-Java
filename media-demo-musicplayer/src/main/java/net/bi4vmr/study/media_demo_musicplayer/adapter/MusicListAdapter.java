@@ -8,22 +8,21 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.bi4vmr.study.media_demo_musicplayer.bean.MusicVO;
-import net.bi4vmr.study.media_demo_musicplayer.databinding.ItemMusiclistBinding;
+import net.bi4vmr.study.media_demo_musicplayer.databinding.MusicListitemBinding;
+import net.bi4vmr.study.media_demo_musicplayer.model.MusicVO;
 
 import java.util.List;
 
 /**
  * Name          : MusicListAdapter
- * Author        : 詹屹罡
- * Email         : yigangzhan@pateo.com.cn
+ * Author        : BI4VMR
  * Date          : 2022-04-18 09:48
- * Description   : TODO 添加描述
+ * Description   : 音乐列表适配器
  */
 public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.MusicVH> {
 
-    private List<MusicVO> dataSource;
-    private Context mContext;
+    private final List<MusicVO> dataSource;
+    private final Context mContext;
 
     private OnItemClickListener onItemClickListener;
 
@@ -36,7 +35,7 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.Musi
     @Override
     public MusicVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        ItemMusiclistBinding binding = ItemMusiclistBinding.inflate(inflater, parent, false);
+        MusicListitemBinding binding = MusicListitemBinding.inflate(inflater, parent, false);
         return new MusicVH(binding);
     }
 
@@ -103,9 +102,9 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.Musi
      */
     static class MusicVH extends RecyclerView.ViewHolder {
 
-        ItemMusiclistBinding mBinding;
+        MusicListitemBinding mBinding;
 
-        public MusicVH(@NonNull ItemMusiclistBinding binding) {
+        public MusicVH(@NonNull MusicListitemBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
         }

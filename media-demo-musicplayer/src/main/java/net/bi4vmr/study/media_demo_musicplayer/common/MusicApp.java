@@ -3,19 +3,14 @@ package net.bi4vmr.study.media_demo_musicplayer.common;
 import android.app.Application;
 
 /**
- * Name          : MyApp
- * Author        : 詹屹罡
- * Email         : yigangzhan@pateo.com.cn
+ * Name          : MusicApp
+ * Author        : BI4VMR
  * Date          : 2022-04-18 10:55
- * Description   : TODO 添加描述
+ * Description   : Application类的子类，生命周期伴随整个应用程序，用于保存全局数据。
  */
 public class MusicApp extends Application {
 
-    public static final String TAG = "myapp";
+    // 全局调试标签
+    public static final String TAG = "MusicApp";
 
-//    public PlaybackVM playbackVM;
-//
-//    public MusicApp() {
-//        playbackVM=new ViewModelProvider().get(PlaybackVM.class);
-//    }
 }
