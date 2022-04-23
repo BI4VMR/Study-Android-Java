@@ -1,11 +1,11 @@
 package net.bi4vmr.study.service_base;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
         // 文本框
         TextView textView = findViewById(R.id.tv_text);
         textView.setText("等待操作...");
+
         // 启动按钮
         Button btStart = findViewById(R.id.bt_start);
         btStart.setOnClickListener(v -> {
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
             boolean isSuccess = stopService(i);
             if (isSuccess) {
                 textView.setText("服务已停止");
+            } else {
+                textView.setText("终止服务失败");
             }
         });
     }

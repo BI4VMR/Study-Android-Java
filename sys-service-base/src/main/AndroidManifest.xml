@@ -10,9 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Study_Android_Java">
 
+        <!-- 注册服务 -->
         <service
             android:name=".DownloadService"
-            android:enabled="true"
             android:exported="false" />
 
         <activity
