@@ -13,16 +13,17 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 /**
- * 前台服务示例类
- *
- * @author BI4VMR
- * @version 1.0
+ * Name          : ForegroundService
+ * Author        : BI4VMR
+ * Date          : 2022-04-18 11:23
+ * Description   : 前台服务示例
  */
-public class FGService extends Service {
+public class ForegroundService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i("myapp", "onStartCommand()");
+        Log.d("myapp", "onStartCommand()");
+
         // 创建通知
         Notification notification = createNotification();
 
@@ -44,7 +45,7 @@ public class FGService extends Service {
 
     @Override
     public void onDestroy() {
-        Log.i("myapp", "onDestroy()");
+        Log.d("myapp", "onDestroy()");
         /*
          * 终止前台服务
          *

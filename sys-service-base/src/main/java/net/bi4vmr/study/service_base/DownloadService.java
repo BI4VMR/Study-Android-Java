@@ -7,6 +7,12 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+/**
+ * Name          : DownloadService
+ * Author        : BI4VMR
+ * Date          : 2022-04-18 11:23
+ * Description   : 启动服务示例
+ */
 public class DownloadService extends Service {
 
     // 下载线程
