@@ -29,28 +29,40 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         // 添加分割线
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        // 数据源中第三、四项是类型2,其它项都是类型1。
         List<ItemBean> datas = getTestDatas();
         MyListAdapter adapter = new MyListAdapter(datas, this);
         recyclerView.setAdapter(adapter);
 
         btRefresh.setOnClickListener(v -> {
-            Log.i("myapp", datas.toString());
-            // 复制一份新的数据集
+            // 获取当前列表的数据源
+            List<ItemBean> oldDatas = adapter.getDataSource();
+            Log.i("myapp", oldDatas.toString());
+            // 复制一份数据集
             List<ItemBean> newDatas = adapter.getCopyOfDataSource();
 
             // 改变部分表项以及表项的数据
             newDatas.get(2).setComment("改变表项的备注");
             newDatas.get(4).setTitle("改变表项的标题");
             newDatas.remove(6);
+            newDatas.add(8, new ItemBean(getID(), "新增表项", "-"));
             Log.i("myapp", newDatas.toString());
-            //
-            DiffUtil.calculateDiff(new MyDiffCallback(datas, newDatas)).dispatchUpdatesTo(adapter);
-            // 刷新数据集
-            adapter.changeDataSource(newDatas);
+            // 更新数据源
+            adapter.updateDataSource(newDatas);
+            // 对比新旧列表的差异
+            DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new MyDiffCallback(oldDatas, newDatas));
+            // 将比对结果应用到适配器，刷新控件。
+            diffResult.dispatchUpdatesTo(adapter);
         });
     }
 
+    /**
+     * Name        获取测试数据
+     * Author      BI4VMR
+     * Date        2022-04-26 00:56
+     * Description 获取测试数据
+     *
+     * @return 测试数据源
+     */
     private List<ItemBean> getTestDatas() {
         // 制造测试数据
         List<ItemBean> datas = new ArrayList<>();
@@ -60,5 +72,22 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return datas;
+    }
+
+    /**
+     * Name        生成随机ID
+     * Author      BI4VMR
+     * Date        2022-04-26 01:02
+     * Description 获取一个ID，取值范围：(20,100)
+     *
+     * @return 整形数值，即生成的ID。
+     */
+    private int getID() {
+        int num;
+        do {
+            num = (int) (Math.random() * 100);
+        } while (num > 20);
+
+        return num;
     }
 }

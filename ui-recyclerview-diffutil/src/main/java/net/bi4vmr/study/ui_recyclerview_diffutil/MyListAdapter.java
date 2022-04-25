@@ -21,15 +21,6 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyViewHold
     // 上下文环境
     Context mContext;
 
-    /**
-     * Name        有参构造方法
-     * Author      BI4VMR
-     * Date        2022-4-9 17:07
-     * Description 适配器构造方法，用于初始化适配器实例。
-     *
-     * @param dataSource 数据源，类型是含有ItemBean的List，传入"null"时自动初始化空列表。
-     * @param context    上下文环境
-     */
     public MyListAdapter(List<ItemBean> dataSource, Context context) {
         // 外部传入的数据源为空时，创建空的列表，以免发生异常。
         if (dataSource == null) {
@@ -61,17 +52,13 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyViewHold
                 Log.d("myapp", "第" + (position + 1) + "项被点击了"));
     }
 
-    /**
-     * Name        获取表项数量
-     * Author      BI4VMR
-     * Date        2022-4-11 22:12
-     * Description 获取表项的数量。
-     *
-     * @return 数据源中项目的数量
-     */
     @Override
     public int getItemCount() {
         return dataSource.size();
+    }
+
+    public List<ItemBean> getDataSource() {
+        return dataSource;
     }
 
     /**
@@ -95,7 +82,15 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyViewHold
         return newList;
     }
 
-    public void changeDataSource(List<ItemBean> newDatas) {
+    /**
+     * Name        更新数据源
+     * Author      BI4VMR
+     * Date        2022-04-26 00:53
+     * Description 使用新的数据源替换旧的数据源。
+     *
+     * @param newDatas 数据源
+     */
+    public void updateDataSource(List<ItemBean> newDatas) {
         dataSource = newDatas;
     }
 

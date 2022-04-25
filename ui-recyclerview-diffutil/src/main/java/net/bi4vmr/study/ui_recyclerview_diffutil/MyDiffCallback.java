@@ -23,10 +23,9 @@ public class MyDiffCallback extends DiffUtil.Callback {
 
     /**
      * Name        : getOldListSize()
-     * Author      : BI4VMR
-     * Date        : 2022-04-25 11:08
      * Description : 系统回调方法，设置旧数据源的大小。
-     * @return 旧数据源的大小
+     *
+     * @return 旧数据源的长度
      */
     @Override
     public int getOldListSize() {
@@ -35,16 +34,25 @@ public class MyDiffCallback extends DiffUtil.Callback {
 
     /**
      * Name        : getNewListSize()
-     * Author      : BI4VMR
-     * Date        : 2022-04-25 11:08
      * Description : 系统回调方法，设置新数据源的大小。
-     * @return 新数据源的大小
+     *
+     * @return 新数据源的长度
      */
     @Override
     public int getNewListSize() {
         return newList.size();
     }
 
+    /**
+     * Name        areItemsTheSame()
+     * Description 系统回调方法，判断参数所指定的两个位置对应Item是否相同。
+     *
+     * @param oldItemPosition 旧的Item索引
+     * @param newItemPosition 新的Item索引
+     * @return 布尔值，值为"true"时表示两个Item相同，但数据可能有变化，随后会调用"areContentsTheSame()"方法判
+     *         断Item中的数据是否需要更新。值为"false"时，表示两个Item不同。
+     *         如果Item有ID或类似的属性，可以比较ID是否相同。
+     */
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
         ItemBean oldItem = oldList.get(oldItemPosition);
@@ -52,6 +60,15 @@ public class MyDiffCallback extends DiffUtil.Callback {
         return oldItem.getId() == newItem.getId();
     }
 
+    /**
+     * Name        areContentsTheSame()
+     * Description 系统回调方法，判断参数所指定的两个位置对应Item内容是否相同。
+     * 仅当"areItemsTheSame()"返回"true"时才会调用本方法。
+     *
+     * @param oldItemPosition 旧的Item索引
+     * @param newItemPosition 新的Item索引
+     * @return 布尔值，值为"true"时表示两个Item内容相同，值为"false"表示两个Item内容不同。
+     */
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
         ItemBean oldItem = oldList.get(oldItemPosition);
