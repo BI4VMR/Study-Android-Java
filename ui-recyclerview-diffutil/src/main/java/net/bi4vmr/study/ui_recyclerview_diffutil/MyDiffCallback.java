@@ -9,7 +9,7 @@ import java.util.List;
  * Version     1.0
  * Author      BI4VMR
  * Date        2022-04-11 21:17
- * Description TODO 添加类描述
+ * Description 自定义的"DiffUtil.Callback"子类，用于设置Item的比较规则。
  */
 public class MyDiffCallback extends DiffUtil.Callback {
 
@@ -21,11 +21,25 @@ public class MyDiffCallback extends DiffUtil.Callback {
         this.newList = newList;
     }
 
+    /**
+     * Name        : getOldListSize()
+     * Author      : BI4VMR
+     * Date        : 2022-04-25 11:08
+     * Description : 系统回调方法，设置旧数据源的大小。
+     * @return 旧数据源的大小
+     */
     @Override
     public int getOldListSize() {
         return oldList.size();
     }
 
+    /**
+     * Name        : getNewListSize()
+     * Author      : BI4VMR
+     * Date        : 2022-04-25 11:08
+     * Description : 系统回调方法，设置新数据源的大小。
+     * @return 新数据源的大小
+     */
     @Override
     public int getNewListSize() {
         return newList.size();
