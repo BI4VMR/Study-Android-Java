@@ -1,8 +1,8 @@
-package net.bi4vmr.study.base_init;
-
-import androidx.appcompat.app.AppCompatActivity;
+package net.bi4vmr.study.base_helloworld;
 
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package net.bi4vmr.study.base_init;
+package net.bi4vmr.study.base_helloworld;
 
 import android.content.Context;
 
