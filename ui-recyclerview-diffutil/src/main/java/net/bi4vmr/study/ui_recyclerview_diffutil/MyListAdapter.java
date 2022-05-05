@@ -1,5 +1,6 @@
 package net.bi4vmr.study.ui_recyclerview_diffutil;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -80,6 +81,24 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyViewHold
             newList.add(new ItemBean(id, title, comment));
         }
         return newList;
+    }
+
+    /**
+     * Name        重新加载列表
+     * Author      BI4VMR
+     * Date        2022-4-10 22:48
+     * Description 使用新的数据源替换RecyclerView中的现有数据。
+     *
+     * @param newDatas 新的数据源List
+     */
+    @SuppressLint("NotifyDataSetChanged")
+    public void reloadItem(List<ItemBean> newDatas) {
+        // 清空数据源
+        dataSource.clear();
+        // 重新填充数据源
+        dataSource.addAll(newDatas);
+        // 通知RecyclerView数据源改变
+        notifyDataSetChanged();
     }
 
     /**

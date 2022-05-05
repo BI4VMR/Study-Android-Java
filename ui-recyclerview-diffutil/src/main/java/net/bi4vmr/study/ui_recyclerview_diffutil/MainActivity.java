@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.rv_content);
         Button btRefresh = findViewById(R.id.bt_refresh);
+        Button btReset = findViewById(R.id.bt_reset);
 
         // 配置RecyclerView
         // 设置布局管理器
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         MyListAdapter adapter = new MyListAdapter(datas, this);
         recyclerView.setAdapter(adapter);
 
+        // 刷新数据集按钮
         btRefresh.setOnClickListener(v -> {
             // 获取当前列表的数据源
             List<ItemBean> oldDatas = adapter.getDataSource();
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             newDatas.remove(6);
             newDatas.add(8, new ItemBean(getID(), "新增表项", "-"));
             Log.i("myapp", newDatas.toString());
+
             // 更新数据源
             adapter.updateDataSource(newDatas);
             // 对比新旧列表的差异
@@ -53,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
             // 将比对结果应用到适配器，刷新控件。
             diffResult.dispatchUpdatesTo(adapter);
         });
+
+        // 重置按钮
+        btReset.setOnClickListener(v -> adapter.reloadItem(getTestDatas()));
     }
 
     /**
