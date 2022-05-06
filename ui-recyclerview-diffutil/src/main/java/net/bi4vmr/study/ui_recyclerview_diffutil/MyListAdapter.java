@@ -49,8 +49,6 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyViewHold
         holder.tv_comment.setText(item.getComment());
         holder.iv_icon.setImageResource(R.drawable.ic_launcher_foreground);
         holder.iv_icon.setBackgroundResource(R.drawable.ic_launcher_background);
-        holder.itemView.setOnClickListener(v ->
-                Log.d("myapp", "第" + (position + 1) + "项被点击了"));
     }
 
     @Override
