@@ -45,10 +45,12 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyViewHold
         //获取当前项的数据
         ItemBean item = dataSource.get(position);
         //将数据设置到当前项的控件中
-        holder.tv_title.setText(item.getTitle());
-        holder.tv_comment.setText(item.getComment());
-        holder.iv_icon.setImageResource(R.drawable.ic_launcher_foreground);
-        holder.iv_icon.setBackgroundResource(R.drawable.ic_launcher_background);
+        holder.tvTitle.setText(item.getTitle());
+        holder.tvComment.setText(item.getComment());
+        holder.ivIcon.setImageResource(R.drawable.ic_launcher_foreground);
+        holder.ivIcon.setBackgroundResource(R.drawable.ic_launcher_background);
+        holder.itemView.setOnClickListener(v ->
+                Log.d("myapp", "第" + (holder.getAdapterPosition() + 1) + "项被点击了"));
     }
 
     @Override
@@ -112,15 +114,16 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyViewHold
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_title;
-        TextView tv_comment;
-        ImageView iv_icon;
+
+        TextView tvTitle;
+        TextView tvComment;
+        ImageView ivIcon;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tv_title = itemView.findViewById(R.id.tv_title);
-            tv_comment = itemView.findViewById(R.id.tv_comment);
-            iv_icon = itemView.findViewById(R.id.iv_icon);
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            tvComment = itemView.findViewById(R.id.tv_comment);
+            ivIcon = itemView.findViewById(R.id.iv_icon);
         }
     }
 }
