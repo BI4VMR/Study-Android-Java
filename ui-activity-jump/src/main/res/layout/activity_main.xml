@@ -10,15 +10,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="打开SecondActivity"
+        android:text="打开第二个Activity"
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/bt_toMsgActivity"
+        android:id="@+id/bt_toWebActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="打开短信Activity"
+        android:text="打开浏览器"
         tools:ignore="HardcodedText" />
 
 </LinearLayout>

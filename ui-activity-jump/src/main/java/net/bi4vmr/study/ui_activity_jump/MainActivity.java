@@ -1,6 +1,7 @@
 package net.bi4vmr.study.ui_activity_jump;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -18,9 +19,21 @@ public class MainActivity extends AppCompatActivity {
         // 设置按钮控件的点击事件
         btGoToSec.setOnClickListener(v -> {
             // 创建Intent对象
-            Intent i = new Intent(MainActivity.this, SecondActivity.class);
+            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
             // 启动SecondActivity
-            startActivity(i);
+            startActivity(intent);
+        });
+
+        // 实例化按钮控件
+        Button btGoToWeb = findViewById(R.id.bt_toWebActivity);
+        // 设置按钮控件的点击事件
+        btGoToWeb.setOnClickListener(v -> {
+            // 构造URI，指定目标URL地址。
+            Uri uri = Uri.parse("https://cn.bing.com/");
+            // 创建Intent对象
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            // 启动默认浏览器的Activity
+            startActivity(intent);
         });
     }
 }
