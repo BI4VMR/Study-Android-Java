@@ -6,7 +6,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "net.bi4vmr.study.ui.basectrl.alertdialog"
+        applicationId "net.bi4vmr.study.ui.basectrl.imageview"
         minSdk 26
         targetSdk 32
         versionCode 1

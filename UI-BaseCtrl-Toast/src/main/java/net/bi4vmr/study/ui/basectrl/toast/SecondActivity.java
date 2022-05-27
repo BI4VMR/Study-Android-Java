@@ -16,6 +16,10 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_02);
 
+        /*
+         * 此示例不支持Android 11及以上版本系统。
+         */
+
         // 显示Toast按钮
         Button btShow = findViewById(R.id.btShow);
         btShow.setOnClickListener(v -> {
@@ -28,7 +32,7 @@ public class SecondActivity extends AppCompatActivity {
 
             // 创建ImageView实例
             ImageView iv = new ImageView(getApplicationContext());
-            iv.setImageResource(R.mipmap.funny_256);
+            iv.setImageResource(R.drawable.ic_funny_256);
 
             // 将ImageView添加到Toast布局中
             layout.addView(iv);

@@ -58,7 +58,7 @@ public class MediaNotificationManager {
         builder.setChannelId(CHANNEL_ID)
                 .setContentIntent(pIntent)
                 // 设置图标
-                .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), mContext.getResources().getIdentifier("funny_256", "mipmap", mContext.getPackageName())))
+                .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), mContext.getResources().getIdentifier("ic_funny_256", "mipmap", mContext.getPackageName())))
                 // 设置通知栏小图标
                 .setSmallIcon(android.R.drawable.ic_dialog_info)
                 // 设置标题

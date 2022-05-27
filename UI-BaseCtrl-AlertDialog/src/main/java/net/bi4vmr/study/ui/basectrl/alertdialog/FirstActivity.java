@@ -19,7 +19,7 @@ public class FirstActivity extends AppCompatActivity {
                 // 设置标题
                 .setTitle("警告对话框")
                 // 设置图标
-                .setIcon(R.mipmap.funny_256)
+                .setIcon(R.drawable.ic_funny_256)
                 // 设置内容
                 .setMessage("此处为消息内容")
                 // 设置确认按钮

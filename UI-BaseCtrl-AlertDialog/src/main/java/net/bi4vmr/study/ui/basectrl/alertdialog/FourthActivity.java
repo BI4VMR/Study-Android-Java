@@ -24,7 +24,7 @@ public class FourthActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
 
         // 创建图片展示框
-        Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.funny_256);
+        Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_funny_256);
         ImageView imageView = new ImageView(this);
         imageView.setImageBitmap(bmp);
 

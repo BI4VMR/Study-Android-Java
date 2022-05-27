@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.bi4vmr.study.ui.basectrl.alertdialog">
+    package="net.bi4vmr.study.ui.basectrl.button">
 
     <application
         android:allowBackup="true"
@@ -26,14 +26,6 @@
 
         <activity
             android:name=".SecondActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".ThirdActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".FourthActivity"
             android:exported="false" />
     </application>
 </manifest>

@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 31
 
     defaultConfig {
-        applicationId "net.bi4vmr.study.ui.basectrl.alertdialog"
+        applicationId "net.bi4vmr.ui.basectrl.edittext"
         minSdk 26
-        targetSdk 32
+        targetSdk 31
         versionCode 1
         versionName "1.0"
     }
