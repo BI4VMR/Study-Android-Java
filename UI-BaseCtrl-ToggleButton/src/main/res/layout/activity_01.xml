@@ -7,9 +7,16 @@
     android:orientation="vertical"
     tools:ignore="HardcodedText">
 
-    <Button
-        android:id="@+id/bt01"
+    <ToggleButton
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="基本应用" />
+        android:textOff="已关闭"
+        android:textOn="已开启" />
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOff="已关闭"
+        android:textOn="已开启" />
 </LinearLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.bi4vmr.study.ui.layout.linear">
+    package="net.bi4vmr.study.ui.basectrl.togglebutton">
 
     <application
         android:allowBackup="true"
@@ -22,14 +22,6 @@
 
         <activity
             android:name=".Demo01Activity"
-            android:exported="false" />
-
-        <activity
-            android:name=".Demo02Activity"
-            android:exported="false" />
-
-        <activity
-            android:name=".Demo03Activity"
             android:exported="false" />
     </application>
 </manifest>

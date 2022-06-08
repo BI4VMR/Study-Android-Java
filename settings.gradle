@@ -17,7 +17,6 @@ dependencyResolutionManagement {
 rootProject.name = "Study-Android-Java"
 include ':base-helloworld'
 
-include ':ui-fragment-base'
 include ':ui-fragment-dynamic'
 include ':ui-fragment-viewpager2'
 include ':ui-recyclerview-base'
@@ -45,6 +44,7 @@ include ':media-lib-mediastore'
 include ':media-demo-musicplayer'
 
 include ':ui-activity-jump'
+include ':UI-Component-Fragment'
 include ':UI-Layout-Linear'
 include ':UI-Layout-Table'
 include ':UI-Layout-Frame'
@@ -52,8 +52,10 @@ include ':UI-Layout-Relative'
 include ':UI-Layout-Constraint'
 include ':UI-BaseCtrl-TextView'
 include ':UI-BaseCtrl-EditText'
+include ':UI-BaseCtrl-Button'
+include ':UI-BaseCtrl-ToggleButton'
+include ':UI-BaseCtrl-ImageView'
 include ':UI-BaseCtrl-Toast'
 include ':UI-BaseCtrl-AlertDialog'
-include ':UI-BaseCtrl-Button'
-include ':UI-BaseCtrl-ImageView'
 include ':UI-CustomView-SeekBarWithIndicator'
+

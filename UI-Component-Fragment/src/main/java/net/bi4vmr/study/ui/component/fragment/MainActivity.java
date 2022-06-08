@@ -1,4 +1,4 @@
-package net.bi4vmr.study.ui.layout.linear;
+package net.bi4vmr.study.ui.component.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,17 +20,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // 换行显示
+        // 初始参数传递
         Button bt2 = findViewById(R.id.bt02);
         bt2.setOnClickListener(v -> {
             Intent intent = new Intent(this, Demo02Activity.class);
-            startActivity(intent);
-        });
-
-        // 权重属性
-        Button bt3 = findViewById(R.id.bt03);
-        bt3.setOnClickListener(v -> {
-            Intent intent = new Intent(this, Demo03Activity.class);
             startActivity(intent);
         });
     }
