@@ -16,14 +16,14 @@ public class MainActivity extends AppCompatActivity {
         // 基本应用
         Button bt1 = findViewById(R.id.bt01);
         bt1.setOnClickListener(v -> {
-            Intent intent = new Intent(this, FirstActivity.class);
+            Intent intent = new Intent(this, Demo01Activity.class);
             startActivity(intent);
         });
 
         // 选择器
         Button bt2 = findViewById(R.id.bt02);
         bt2.setOnClickListener(v -> {
-            Intent intent = new Intent(this, SecondActivity.class);
+            Intent intent = new Intent(this, Demo02Activity.class);
             startActivity(intent);
         });
     }

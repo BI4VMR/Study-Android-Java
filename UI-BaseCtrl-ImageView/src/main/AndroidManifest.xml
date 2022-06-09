@@ -21,7 +21,7 @@
         </activity>
 
         <activity
-            android:name=".FirstActivity"
+            android:name=".Demo01Activity"
             android:exported="false" />
     </application>
 </manifest>

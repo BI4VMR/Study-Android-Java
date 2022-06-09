@@ -16,28 +16,28 @@ public class MainActivity extends AppCompatActivity {
         // 基本应用
         Button bt1 = findViewById(R.id.bt01);
         bt1.setOnClickListener(v -> {
-            Intent intent = new Intent(this, FirstActivity.class);
+            Intent intent = new Intent(this, Demo01Activity.class);
             startActivity(intent);
         });
 
         // 基本应用
         Button bt2 = findViewById(R.id.bt02);
         bt2.setOnClickListener(v -> {
-            Intent intent = new Intent(this, SecondActivity.class);
+            Intent intent = new Intent(this, Demo02Activity.class);
             startActivity(intent);
         });
 
         // 基本应用
         Button bt3 = findViewById(R.id.bt03);
         bt3.setOnClickListener(v -> {
-            Intent intent = new Intent(this, ThirdActivity.class);
+            Intent intent = new Intent(this, Demo03Activity.class);
             startActivity(intent);
         });
 
         // 自定义布局
         Button bt4 = findViewById(R.id.bt04);
         bt4.setOnClickListener(v -> {
-            Intent intent = new Intent(this, FourthActivity.class);
+            Intent intent = new Intent(this, Demo04Activity.class);
             startActivity(intent);
         });
     }

@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         // “基本应用”按钮
         Button btBase = findViewById(R.id.btBase);
         btBase.setOnClickListener(view ->
-                startActivity(new Intent(this, FirstActivity.class))
+                startActivity(new Intent(this, Demo01Activity.class))
         );
     }
 }

@@ -6,8 +6,6 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import net.bi4vmr.study.ui.layout.table.R;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -18,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         // 基本应用
         Button bt1 = findViewById(R.id.bt01);
         bt1.setOnClickListener(v -> {
-            Intent intent = new Intent(this, FirstActivity.class);
+            Intent intent = new Intent(this, Demo01Activity.class);
             startActivity(intent);
         });
     }
