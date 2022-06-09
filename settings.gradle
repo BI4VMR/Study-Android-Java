@@ -59,3 +59,4 @@ include ':UI-BaseCtrl-Toast'
 include ':UI-BaseCtrl-AlertDialog'
 include ':UI-CustomView-SeekBarWithIndicator'
 
+include ':UI-ExtCtrl-RecyclerView'
