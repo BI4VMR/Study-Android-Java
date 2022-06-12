@@ -21,5 +21,47 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="-" />
+        android:text="表项点击事件" />
+
+    <Button
+        android:id="@+id/bt03"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="多种View类型"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/bt04"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="动态更新表项" />
+
+    <Button
+        android:id="@+id/bt05"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="局部刷新" />
+
+    <Button
+        android:id="@+id/bt06"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="DiffUtil"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/bt07"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="缓存与复用" />
 </LinearLayout>

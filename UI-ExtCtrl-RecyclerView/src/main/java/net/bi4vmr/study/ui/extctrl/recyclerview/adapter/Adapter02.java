@@ -16,20 +16,32 @@ import net.bi4vmr.study.ui.extctrl.recyclerview.vo.Type1VO;
 import java.util.List;
 
 /**
- * Name        : Adapter01
+ * Name        : Adapter02
  * Author      : BI4VMR
  * Email       : bi4vmr@qq.com
- * Date        : 2022-06-10 00:03
- * Description : Demo01所使用的适配器。
+ * Date        : 2022-06-11 11:11
+ * Description : Demo02所使用的适配器。
  */
-public class Adapter01 extends RecyclerView.Adapter<Adapter01.MyViewHolder> {
+public class Adapter02 extends RecyclerView.Adapter<Adapter02.MyViewHolder> {
 
     // 数据源
     private final List<Type1VO> dataSource;
     // 上下文环境
     private final Context mContext;
 
-    public Adapter01(List<Type1VO> dataSource, Context context) {
+    // 点击事件监听器实现类
+    private ItemClickListener listener;
+
+    /* 点击监听器 */
+    public interface ItemClickListener {
+        void onClick(int position);
+    }
+
+    public void setItemClickListener(ItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public Adapter02(List<Type1VO> dataSource, Context context) {
         this.dataSource = dataSource;
         this.mContext = context;
     }
@@ -50,6 +62,14 @@ public class Adapter01 extends RecyclerView.Adapter<Adapter01.MyViewHolder> {
         // 将数据设置到当前项的控件中
         holder.tvTitle.setText(item.getTitle());
         holder.tvInfo.setText(item.getInfo());
+
+        // 设置View的点击事件
+        holder.itemView.setOnClickListener(v -> {
+            // 如果外部设置了点击事件监听器，则通知它事件触发。
+            if (listener != null) {
+                listener.onClick(holder.getAdapterPosition());
+            }
+        });
     }
 
     /* 获取表项的总数量 */

@@ -10,11 +10,19 @@ package net.bi4vmr.study.ui.extctrl.recyclerview.vo;
 public class Type1VO {
 
     private String title;
-    private String comment;
+    private String info;
 
-    public Type1VO(String title, String comment) {
+    public Type1VO() {
+    }
+
+    public Type1VO(String title) {
         this.title = title;
-        this.comment = comment;
+        info = "-";
+    }
+
+    public Type1VO(String title, String info) {
+        this.title = title;
+        this.info = info;
     }
 
     public String getTitle() {
@@ -25,11 +33,11 @@ public class Type1VO {
         this.title = title;
     }
 
-    public String getComment() {
-        return comment;
+    public String getInfo() {
+        return info;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setInfo(String info) {
+        this.info = info;
     }
 }
