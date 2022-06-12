@@ -31,10 +31,9 @@ include ':UI-BaseCtrl-ImageView'
 include ':UI-BaseCtrl-Toast'
 include ':UI-BaseCtrl-AlertDialog'
 include ':UI-ExtCtrl-RecyclerView'
+include ':UI-ExtCtrl-ViewPager'
+include ':UI-ExtCtrl-ViewPager2'
 include ':UI-CustomView-SeekBarWithIndicator'
-
-include ':ui-fragment-viewpager2'
-include ':ui-activity-jump'
 
 include ':sys-service-base'
 include ':sys-service-foreground'
@@ -53,3 +52,4 @@ include ':store-sharedpreferences'
 include ':media-audio-audiofocus'
 include ':media-lib-mediastore'
 include ':media-demo-musicplayer'
+
