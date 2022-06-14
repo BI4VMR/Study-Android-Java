@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyAndroidJava">
         <activity
+            android:name=".Demo02Activity"
+            android:exported="false" />
+        <activity
             android:name=".Demo01Activity"
             android:exported="false" />
         <activity
@@ -22,4 +25,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

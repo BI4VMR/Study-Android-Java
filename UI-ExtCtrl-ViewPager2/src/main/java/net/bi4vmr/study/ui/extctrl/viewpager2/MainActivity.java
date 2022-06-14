@@ -19,5 +19,12 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, Demo01Activity.class);
             startActivity(intent);
         });
+
+        // ViewPager2嵌套使用
+        Button bt2 = findViewById(R.id.bt02);
+        bt2.setOnClickListener(v -> {
+            Intent intent = new Intent(this, Demo02Activity.class);
+            startActivity(intent);
+        });
     }
 }
