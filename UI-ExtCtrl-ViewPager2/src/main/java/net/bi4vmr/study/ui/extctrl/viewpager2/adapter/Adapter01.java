@@ -1,5 +1,7 @@
 package net.bi4vmr.study.ui.extctrl.viewpager2.adapter;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -24,12 +26,14 @@ public class Adapter01 extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
+        Log.d("myapp", "createFragment()-position:" + position);
         return pages.get(position);
     }
 
     /* 获取页面数量 */
     @Override
     public int getItemCount() {
+        Log.d("myapp", "getItemCount()-count:" + pages.size());
         return pages.size();
     }
 }

@@ -6,6 +6,5 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp2Content"
         android:layout_width="match_parent"
-        android:layoutDirection="rtl"
         android:layout_height="150dp" />
 </FrameLayout>
