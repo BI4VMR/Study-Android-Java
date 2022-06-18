@@ -1,6 +1,8 @@
 package net.bi4vmr.study.store.db.room.demo01;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 /**
@@ -8,7 +10,7 @@ import androidx.room.PrimaryKey;
  * Author      : BI4VMR
  * Email       : bi4vmr@qq.com
  * Date        : 2022-06-15 22:29
- * Description : TODO 添加描述
+ * Description : “学生”实体类
  */
 @Entity
 public class Student {
@@ -17,6 +19,11 @@ public class Student {
     private int id;
     private String name;
     private int age;
+
+    @Ignore
+    public Student(int id) {
+        this.id = id;
+    }
 
     public Student(int id, String name, int age) {
         this.id = id;
@@ -48,6 +55,7 @@ public class Student {
         this.age = age;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Student{" +

@@ -18,16 +18,19 @@ public abstract class StudentDB extends RoomDatabase {
 
     private static StudentDB instance;
 
+    // 单例模式：获取DB实例。
     public static synchronized StudentDB getInstance(Context context) {
         if (instance == null) {
-            instance =
-                    Room.databaseBuilder(context.getApplicationContext(), StudentDB.class, "aaa")
-                            // Room默认在子线程执行SQL语句，此语句可以切换至主线程操作，仅适用于调试。
-                            .allowMainThreadQueries()
-                            .build();
+            Context appCtx = context.getApplicationContext();
+            instance = Room.databaseBuilder(appCtx, StudentDB.class, "Test")
+                    // Room默认不允许在主线程执行操作，此配置允许在主线程操作，仅适用于调试。
+                    .allowMainThreadQueries()
+                    // 构建实例
+                    .build();
         }
         return instance;
     }
 
-    public abstract StudentDAO studentDAO();
+    // 抽象方法，返回StudentDAO实例
+    public abstract StudentDAO getStudentDAO();
 }
