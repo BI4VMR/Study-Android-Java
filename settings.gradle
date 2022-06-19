@@ -33,6 +33,7 @@ include ':UI-BaseCtrl-AlertDialog'
 include ':UI-ExtCtrl-RecyclerView'
 include ':UI-ExtCtrl-ViewPager'
 include ':UI-ExtCtrl-ViewPager2'
+include ':UI-ExtCtrl-TabLayout'
 include ':UI-CustomView-SeekBarWithIndicator'
 
 include ':sys-service-base'
