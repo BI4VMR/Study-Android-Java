@@ -54,3 +54,4 @@ include ':media-lib-mediastore'
 include ':media-demo-musicplayer'
 
 include ':Store-DB-Room'
+include ':Sys-Common'
