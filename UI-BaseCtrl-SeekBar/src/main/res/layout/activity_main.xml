@@ -21,29 +21,5 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="列表对话框" />
-
-    <Button
-        android:id="@+id/bt03"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:text="选择对话框" />
-
-    <Button
-        android:id="@+id/bt04"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:text="自定义布局" />
-
-    <Button
-        android:id="@+id/bt05"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:text="自定义样式" />
+        android:text="外观定制" />
 </LinearLayout>

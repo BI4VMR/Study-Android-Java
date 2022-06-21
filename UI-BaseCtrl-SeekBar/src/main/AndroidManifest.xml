@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.bi4vmr.study.ui.basectrl.alertdialog">
+    package="net.bi4vmr.study.ui.basectrl.seekbar">
 
     <application
         android:allowBackup="true"
@@ -9,9 +9,15 @@
         android:roundIcon="@drawable/ic_funny_256"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyAndroidJava">
+
         <activity
-            android:name=".Demo05Activity"
+            android:name=".demo01.Demo01Activity"
             android:exported="false" />
+
+        <activity
+            android:name=".demo02.Demo02Activity"
+            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -21,18 +27,5 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Demo01Activity"
-            android:exported="false" />
-        <activity
-            android:name=".Demo02Activity"
-            android:exported="false" />
-        <activity
-            android:name=".Demo03Activity"
-            android:exported="false" />
-        <activity
-            android:name=".Demo04Activity"
-            android:exported="false" />
     </application>
-
 </manifest>
