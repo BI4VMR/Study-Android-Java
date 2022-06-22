@@ -1,4 +1,4 @@
-package net.bi4vmr.study.ui.basectrl.alertdialog;
+package net.bi4vmr.study.ui.basectrl.alertdialog.demo02;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -6,6 +6,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import net.bi4vmr.study.ui.basectrl.alertdialog.R;
 
 public class Demo02Activity extends AppCompatActivity {
 

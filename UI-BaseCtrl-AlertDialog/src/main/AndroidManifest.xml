@@ -9,9 +9,7 @@
         android:roundIcon="@drawable/ic_funny_256"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyAndroidJava">
-        <activity
-            android:name=".Demo05Activity"
-            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -21,18 +19,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".Demo01Activity"
+            android:name=".demo01.Demo01Activity"
             android:exported="false" />
+
         <activity
-            android:name=".Demo02Activity"
+            android:name=".demo02.Demo02Activity"
             android:exported="false" />
+
         <activity
-            android:name=".Demo03Activity"
+            android:name=".demo03.Demo03Activity"
             android:exported="false" />
+
         <activity
-            android:name=".Demo04Activity"
+            android:name=".demo04.Demo04Activity"
+            android:exported="false" />
+
+        <activity
+            android:name=".demo05.Demo05Activity"
             android:exported="false" />
     </application>
-
 </manifest>

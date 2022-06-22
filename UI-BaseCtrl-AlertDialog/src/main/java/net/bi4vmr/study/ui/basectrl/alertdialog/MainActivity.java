@@ -6,6 +6,12 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import net.bi4vmr.study.ui.basectrl.alertdialog.demo01.Demo01Activity;
+import net.bi4vmr.study.ui.basectrl.alertdialog.demo02.Demo02Activity;
+import net.bi4vmr.study.ui.basectrl.alertdialog.demo03.Demo03Activity;
+import net.bi4vmr.study.ui.basectrl.alertdialog.demo04.Demo04Activity;
+import net.bi4vmr.study.ui.basectrl.alertdialog.demo05.Demo05Activity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -41,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // 自定义样式
+        // 自定义窗体
         Button bt5 = findViewById(R.id.bt05);
         bt5.setOnClickListener(v -> {
             Intent intent = new Intent(this, Demo05Activity.class);

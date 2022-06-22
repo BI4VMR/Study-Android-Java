@@ -1,4 +1,4 @@
-package net.bi4vmr.study.ui.basectrl.alertdialog;
+package net.bi4vmr.study.ui.basectrl.alertdialog.demo03;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -6,6 +6,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import net.bi4vmr.study.ui.basectrl.alertdialog.R;
 
 public class Demo03Activity extends AppCompatActivity {
 
@@ -51,7 +53,7 @@ public class Demo03Activity extends AppCompatActivity {
         Button btShow1 = findViewById(R.id.btShow1);
         btShow1.setOnClickListener(v -> dialog1.show());
 
-        // 显示单选弹窗按钮
+        // 显示多选弹窗按钮
         Button btShow2 = findViewById(R.id.btShow2);
         btShow2.setOnClickListener(v -> dialog2.show());
     }
