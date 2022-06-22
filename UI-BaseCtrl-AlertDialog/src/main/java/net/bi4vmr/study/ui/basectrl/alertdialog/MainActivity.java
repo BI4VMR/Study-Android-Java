@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         // 自定义样式
         Button bt5 = findViewById(R.id.bt05);
         bt5.setOnClickListener(v -> {
-            Intent intent = new Intent(this, Demo04Activity.class);
+            Intent intent = new Intent(this, Demo05Activity.class);
             startActivity(intent);
         });
     }
